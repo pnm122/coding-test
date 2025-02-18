@@ -40,7 +40,6 @@ export default function FilterSearch<T extends 'Pet' | 'Toy'>({
     <Input
       id={id}
       value={value}
-      label="Search"
       placeholder="Search for animals"
       icon={<FluentSearch16Filled />}
       onChange={onChange}

@@ -7,10 +7,13 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  position: sticky;
-  top: 0;
-  z-index: 1;
   background-color: var(--background);
+
+  @media screen and (width > $screen-sm) {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
 
   @media screen and (width > $screen-md) {
     @include page-columns;
