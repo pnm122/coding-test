@@ -1,8 +1,16 @@
 import Filters from '@/components/Filters/Filters'
 import ProductsPage from '@/components/ProductsPage/ProductsPage'
+import { validateSearchParams } from '@/utils/searchParams'
 import React from 'react'
 
-export default function Pets() {
+export default async function Pets({
+  searchParams
+}: {
+  searchParams: Promise<Record<string, string | string[] | undefined>>
+}) {
+  const res = await searchParams
+  console.log(res, validateSearchParams(res, 'Pet'))
+
   return (
     <ProductsPage>
       <Filters />
