@@ -16,9 +16,10 @@ export default function Product({
       <div className={styles['card']}>
         <span className={createClasses({
           [styles['card__type']]: true,
-          [styles['card__type--pet']]: true
+          [styles['card__type--pet']]: product.product === 'Pet',
+          [styles['card__type--toy']]: product.product === 'Toy'
         })}>
-          Pet
+          {product.product}
         </span>
         <div className={createClasses({
           [styles['colors']]: true,
