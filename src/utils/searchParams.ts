@@ -63,7 +63,12 @@ export function validateSearchParams<T extends "Pet" | "Toy">(
       : 100,
     [SEARCH_PARAM_ATTRIBUTE]:
       type === "Toy" ? null : toArray(params[SEARCH_PARAM_ATTRIBUTE]),
-    [SEARCH_PARAM_SEARCH]: params[SEARCH_PARAM_SEARCH]
+    [SEARCH_PARAM_SEARCH]:
+      typeof params[SEARCH_PARAM_SEARCH] === 'string'
+        ? params[SEARCH_PARAM_SEARCH]
+        : !params[SEARCH_PARAM_SEARCH]
+          ? ''
+          : params[SEARCH_PARAM_SEARCH][0]
   } as ValidSearchParams<T>;
 }
 
