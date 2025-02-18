@@ -1,36 +1,42 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Coffey Communications Coding Test
 
-## Getting Started
+An application to fetch and filter pets and toys, built for an interview at Coffey Communications.
 
-First, run the development server:
+## Diagram
+
+The Entity Relationship Diagram I created for this project can be found at `erd/erd.html`.
+
+## How to run
+
+### Installing the repository and dependencies
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Clone this repository
+git clone https://github.com/pnm122/coding-test
+
+# Go into the repository
+cd coding-test
+
+# Install dependencies
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Getting the database running
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+You'll need a Postgres database to run this project. Once you have one, in a root `.env` file, you'll need to put a URL for the database:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```sh
+DATABASE_URL=postgresql://[USER]:[PASSWORD]@[HOST]:[PORT]/[DATABASE]?schema=[SCHEMA] # i.e. DATABASE_URL=postgresql://pnm122:abc123@localhost:5432/coding-test?schema=public
+```
 
-## Learn More
+After creating the `.env`, you'll need to update the database to match the schema. You can do so by running `npx prisma migrate dev`.
 
-To learn more about Next.js, take a look at the following resources:
+Finally, you'll want to seed the database with the data I've provided. You can do this by running `npm run seed`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Running the app
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+After you've installed the dependencies and linked a database, the project is ready to run! You can run the app with the command `npm run dev`.
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Pierce Martin
