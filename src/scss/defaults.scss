@@ -4,3 +4,22 @@
   background-color: var(--background);
   color: var(--text);
 }
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font: var(--font-heading-base);
+  color: var(--heading);
+}
+
+::placeholder {
+  color: var(--placeholder);
+}
+
+hr {
+  border: none;
+  border-top: 2px solid var(--border);
+}
