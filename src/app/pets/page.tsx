@@ -9,11 +9,11 @@ export default async function Pets({
   searchParams: Promise<Record<string, string | string[] | undefined>>
 }) {
   const res = await searchParams
-  console.log(res, validateSearchParams(res, 'Pet'))
+  const validParams = validateSearchParams(res, 'Pet')
 
   return (
     <ProductsPage>
-      <Filters />
+      <Filters type='Pet' searchParams={validParams} />
     </ProductsPage>
   )
 }

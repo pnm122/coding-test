@@ -1,0 +1,50 @@
+.checkbox {
+	color: var(--heading);
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	gap: 8px;
+	line-height: 1;
+
+	&:focus-visible .checkbox__box {
+		border-color: var(--neutral-900);
+	}
+
+	&[aria-checked='false']:hover {
+		.checkbox__box {
+			background-color: var(--border);
+
+			.check {
+				display: block;
+				color: var(--neutral-500);
+			}
+		}
+	}
+
+	&[aria-checked='true'] {
+		.checkbox__box {
+			border: none;
+			background-color: var(--primary-base);
+
+			.check {
+				display: block;
+			}
+		}
+	}
+
+	&__box {
+		border: 2px solid var(--border);
+    border-radius: 3px;
+		width: 16px;
+		height: 16px;
+		display: grid;
+		place-items: center;
+
+		.check {
+			color: var(--white);
+			width: 100%;
+			height: 100%;
+			display: none;
+		}
+	}
+}

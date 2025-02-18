@@ -7,14 +7,17 @@ import styles from './style.module.scss'
 import FluentFilter16Filled from '~icons/fluent/filter-16-filled'
 import FluentCaretDown16Filled from '~icons/fluent/caret-down-16-filled'
 import Dropdown from '../Dropdown/Dropdown'
+import { ValidSearchParams } from '@/utils/searchParams'
 
-interface Props {
-  type: 'Pet' | 'Toy'
+interface Props<T extends 'Pet' | 'Toy'> {
+  type: T
+  searchParams: ValidSearchParams<T>
 }
 
-export default function Filters({
-  type
-}: Props) {
+export default function Filters<T extends 'Pet' | 'Toy'>({
+  type,
+  searchParams
+}: Props<T>) {
   const [open, setOpen] = useState(false)
   const firstFilterRef = useRef<HTMLDivElement>(null)
   const toggleButtonRef = useRef<HTMLButtonElement>(null)
@@ -22,7 +25,7 @@ export default function Filters({
   return (
     <div className={styles['filters']}>
       <FilterSearch />
-      <MainFilters type={type} className={styles['desktop-filters']} />
+      <MainFilters searchParams={searchParams} type={type} className={styles['desktop-filters']} />
       <div className={styles['mobile-filters']}>
         <button
           aria-controls='filters-dropdown'
@@ -45,7 +48,7 @@ export default function Filters({
           focusOnOpenRef={firstFilterRef}
           toggleButton={toggleButtonRef}
         >
-          <MainFilters firstFilterRef={firstFilterRef} type={type} />
+          <MainFilters searchParams={searchParams} firstFilterRef={firstFilterRef} type={type} />
         </Dropdown>
       </div>
     </div>
