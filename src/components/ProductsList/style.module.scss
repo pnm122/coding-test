@@ -4,6 +4,7 @@
 .product-list {
   @include columns(1);
   grid-column: 1 / 3;
+  grid-template-rows: min-content;
   
   @media screen and (width > $screen-xs) {
     @include columns(2);
