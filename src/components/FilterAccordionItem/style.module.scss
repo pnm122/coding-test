@@ -1,0 +1,34 @@
+.filter-item {
+  border-bottom: 2px solid var(--border);
+
+  &__button {
+    height: 44px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    
+    &--expanded .caret {
+      rotate: 90deg;
+    }
+  }
+
+  .caret {
+    transition: rotate 0.25s var(--timing);
+  }
+
+  .header {
+    color: var(--heading);
+    font: var(--font-heading-xl);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .content {
+    transition: height 0.25s var(--timing);
+    
+    &__inner {
+      padding-bottom: 12px;
+    }
+  }
+}

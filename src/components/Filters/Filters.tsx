@@ -16,7 +16,7 @@ export default function Filters({
   type
 }: Props) {
   const [open, setOpen] = useState(false)
-  const firstFilterRef = useRef<HTMLButtonElement>(null)
+  const firstFilterRef = useRef<HTMLDivElement>(null)
   const toggleButtonRef = useRef<HTMLButtonElement>(null)
 
   return (

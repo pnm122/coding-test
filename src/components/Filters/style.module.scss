@@ -6,6 +6,9 @@
   height: calc(100vh - var(--header-size));
   max-height: calc(-webkit-fill-available - var(--header-size));
   grid-column: 1 / 3;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 
   @media screen and (width > $screen-sm) {
     grid-column: 1 / 2;
@@ -15,8 +18,16 @@
 .mobile-filters {
   position: relative;
 
-  @media screen and (width > $screen-md) {
+  @media screen and (width > $screen-sm) {
     display: none;
+  }
+}
+
+.desktop-filters {
+  display: none;
+
+  @media screen and (width > $screen-sm) {
+    display: block;
   }
 }
 
