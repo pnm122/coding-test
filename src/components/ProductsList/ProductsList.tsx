@@ -1,4 +1,4 @@
-import { getPets } from '@/utils/database/animal'
+import { getPets, getToys } from '@/utils/database/animal'
 import styles from './style.module.scss'
 import { ValidSearchParams } from '@/utils/searchParams'
 import Product from '../Product/Product'
@@ -12,7 +12,7 @@ export default async function ProductsList<T extends 'Pet' | 'Toy'>({
   type,
   searchParams
 }: Props<T>) {
-  const res = type === 'Pet' ? await getPets(searchParams as ValidSearchParams<'Pet'>) : []
+  const res = type === 'Pet' ? await getPets(searchParams as ValidSearchParams<'Pet'>) : await getToys(searchParams as ValidSearchParams<'Toy'>)
 
   return (
     <div className={styles['product-list']}>

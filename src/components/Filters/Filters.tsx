@@ -12,7 +12,7 @@ import { ValidSearchParams } from '@/utils/searchParams'
 interface Props<T extends 'Pet' | 'Toy'> {
   type: T
   searchParams: ValidSearchParams<T>
-  attributesFilter: React.ReactNode
+  attributesFilter?: React.ReactNode
 }
 
 export default function Filters<T extends 'Pet' | 'Toy'>({
