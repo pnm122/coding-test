@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+
+$font: 'Outfit', system-ui, sans-serif;
+$line-height-body: 1.5;
+$line-height-heading: 1.1;
+
+:root {
+  --font-body-xs: 400 0.75rem / #{$line-height-body} #{$font};
+  --font-body-sm: 400 0.875rem / #{$line-height-body} #{$font};
+  --font-body-base: 400 1rem / #{$line-height-body} #{$font};
+  --font-body-lg: 400 1.125rem / #{$line-height-body} #{$font};
+  --font-body-xl: 400 1.25rem / #{$line-height-body} #{$font};
+
+  --font-heading-sm: 400 0.875rem / #{$line-height-heading} #{$font};
+  --font-heading-base: 400 1rem / #{$line-height-heading} #{$font};
+  --font-heading-lg: 400 1.125rem / #{$line-height-heading} #{$font};
+  --font-heading-xl: 400 1.25rem / #{$line-height-heading} #{$font};
+  --font-heading-2xl: 400 1.5rem / #{$line-height-heading} #{$font};
+  --font-heading-3xl: 400 1.75rem / #{$line-height-heading} #{$font};
+}
