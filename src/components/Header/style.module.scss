@@ -3,10 +3,12 @@
 
 .header {
   @include container;
-  height: 52px;
+  height: var(--header-size);
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: sticky;
+  top: 0;
 
   @media screen and (width > $screen-md) {
     @include page-columns;

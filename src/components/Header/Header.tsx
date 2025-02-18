@@ -4,7 +4,7 @@ import HeaderLink from './HeaderLink'
 
 export default function Header() {
   return (
-    <div className={styles['header']}>
+    <header className={styles['header']}>
       <Logo />
       <nav className={styles['header__nav']}>
         <ul className={styles['links']}>
@@ -22,6 +22,6 @@ export default function Header() {
           </li>
         </ul>
       </nav>
-    </div>
+    </header>
   )
 }

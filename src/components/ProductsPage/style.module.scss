@@ -1,0 +1,6 @@
+@use '@/scss/layout' as *;
+
+.page {
+  @include page-columns;
+  @include container;
+}
