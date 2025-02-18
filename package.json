@@ -16,6 +16,8 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@iconify-json/fluent": "^1.2.14",
+    "@svgr/plugin-jsx": "^8.1.0",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
@@ -23,6 +25,7 @@
     "eslint-config-next": "15.1.7",
     "prisma": "^6.3.1",
     "sass": "^1.85.0",
-    "typescript": "^5"
+    "typescript": "^5",
+    "unplugin-icons": "^22.0.0"
   }
 }
