@@ -118,7 +118,8 @@ export default function MainFilters<T extends 'Pet' | 'Toy'>({
           </div>
         </FilterAccordionItem>
         {type === 'Pet' && (
-          <FilterAccordionItem header='Attributes'>
+          // Not the greatest UX but keying this to the type makes sure we don't get a state where the checkboxes don't fit in the content box properly
+          <FilterAccordionItem header='Attributes' key={JSON.stringify(searchParams[SEARCH_PARAM_TYPE])}>
             {attributesFilter}
           </FilterAccordionItem>
         )}
