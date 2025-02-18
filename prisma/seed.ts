@@ -269,10 +269,10 @@ async function seedPets() {
                   }
                 },
                 attributes: {
-                  connectOrCreate: pet.attributes.map((attribute, index) => ({
-                    where: { id: (pet.id * 100) + index },
+                  connectOrCreate: pet.attributes.map((attribute) => ({
+                    where: { id: (pet.id * 100) + attributes.findIndex(attr => attr === attribute)! },
                     create: {
-                      id: (pet.id * 100) + index,
+                      id: (pet.id * 100) + attributes.findIndex(attr => attr === attribute)!,
                       attribute_id: attributes.findIndex(attr => attr === attribute)!
                     }
                   }))
