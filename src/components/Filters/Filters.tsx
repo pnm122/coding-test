@@ -26,7 +26,7 @@ export default function Filters<T extends 'Pet' | 'Toy'>({
 
   return (
     <div className={styles['filters']}>
-      <FilterSearch />
+      <FilterSearch searchParams={searchParams} />
       <MainFilters searchParams={searchParams} type={type} className={styles['desktop-filters']} attributesFilter={attributesFilter} />
       <div className={styles['mobile-filters']}>
         <button

@@ -1,5 +1,5 @@
 import { prisma } from "@/prisma";
-import { SEARCH_PARAM_ATTRIBUTE, SEARCH_PARAM_COLOR, SEARCH_PARAM_TYPE, SEARCH_PARAM_WEIGHT_MAX, SEARCH_PARAM_WEIGHT_MIN, ValidSearchParams } from "../searchParams";
+import { SEARCH_PARAM_ATTRIBUTE, SEARCH_PARAM_COLOR, SEARCH_PARAM_SEARCH, SEARCH_PARAM_TYPE, SEARCH_PARAM_WEIGHT_MAX, SEARCH_PARAM_WEIGHT_MIN, ValidSearchParams } from "../searchParams";
 import { ColorEnum, PetTypeEnum } from "@prisma/client";
 
 export const getPetsSelect = {
@@ -43,6 +43,10 @@ export async function getPets(
   try {
     const res = await prisma.animal.findMany({
       where: {
+        name: {
+          contains: filters[SEARCH_PARAM_SEARCH],
+          mode: 'insensitive'
+        },
         colors: {
           some: {
             color: {

@@ -7,6 +7,7 @@ export const SEARCH_PARAM_COLOR = "color" as const;
 export const SEARCH_PARAM_WEIGHT_MIN = "weight-min" as const;
 export const SEARCH_PARAM_WEIGHT_MAX = "weight-max" as const;
 export const SEARCH_PARAM_ATTRIBUTE = "attribute" as const;
+export const SEARCH_PARAM_SEARCH = "search" as const;
 
 export interface ValidSearchParams<T extends "Pet" | "Toy"> {
   [SEARCH_PARAM_TYPE]: T extends "Pet" ? PetTypeEnum[] : ToyTypeEnum[];
@@ -14,6 +15,7 @@ export interface ValidSearchParams<T extends "Pet" | "Toy"> {
   [SEARCH_PARAM_WEIGHT_MIN]: number;
   [SEARCH_PARAM_WEIGHT_MAX]: number;
   [SEARCH_PARAM_ATTRIBUTE]: T extends "Pet" ? string[] : null;
+  [SEARCH_PARAM_SEARCH]: string
 }
 
 export function newParamsURL<T extends { [key: string]: string | string[] }>(
@@ -61,6 +63,7 @@ export function validateSearchParams<T extends "Pet" | "Toy">(
       : 100,
     [SEARCH_PARAM_ATTRIBUTE]:
       type === "Toy" ? null : toArray(params[SEARCH_PARAM_ATTRIBUTE]),
+    [SEARCH_PARAM_SEARCH]: params[SEARCH_PARAM_SEARCH]
   } as ValidSearchParams<T>;
 }
 
