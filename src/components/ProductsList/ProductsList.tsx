@@ -1,6 +1,7 @@
 import { getPets } from '@/utils/database/animal'
 import styles from './style.module.scss'
 import { ValidSearchParams } from '@/utils/searchParams'
+import Product from '../Product/Product'
 
 interface Props<T extends 'Pet' | 'Toy'> {
   type: T,
@@ -14,9 +15,9 @@ export default async function ProductsList<T extends 'Pet' | 'Toy'>({
   const res = type === 'Pet' ? await getPets(searchParams as ValidSearchParams<'Pet'>) : []
 
   return (
-    <div>
+    <div className={styles['product-list']}>
       {res.map(pet => (
-        <div key={pet.id}>{pet.pet?.attributes.map(({ attribute }) => attribute.attribute).join(', ')}</div>
+        <Product key={pet.id} product={pet} />
       ))}
     </div>
   )

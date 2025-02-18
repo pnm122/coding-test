@@ -2,6 +2,41 @@ import { prisma } from "@/prisma";
 import { SEARCH_PARAM_ATTRIBUTE, SEARCH_PARAM_COLOR, SEARCH_PARAM_TYPE, SEARCH_PARAM_WEIGHT_MAX, SEARCH_PARAM_WEIGHT_MIN, ValidSearchParams } from "../searchParams";
 import { ColorEnum, PetTypeEnum } from "@prisma/client";
 
+export const getPetsSelect = {
+  select: {
+    id: true,
+    name: true,
+    weight: true,
+    colors: {
+      select: {
+        color: {
+          select: {
+            color: true,
+            id: true
+          }
+        }
+      }
+    },
+    product: true,
+    sale: true,
+    pet: {
+      select: {
+        attributes: {
+          select: {
+            attribute: {
+              select: {
+                attribute: true,
+                id: true
+              }
+            }
+          }
+        },
+        type: true
+      }
+    }
+  }
+}
+
 export async function getPets(
   filters: ValidSearchParams<'Pet'>
 ) {
@@ -43,35 +78,7 @@ export async function getPets(
             )
         }
       },
-      select: {
-        id: true,
-        name: true,
-        weight: true,
-        colors: {
-          select: {
-            color: {
-              select: {
-                color: true
-              }
-            }
-          }
-        },
-        product: true,
-        sale: true,
-        pet: {
-          select: {
-            attributes: {
-              select: {
-                attribute: {
-                  select: {
-                    attribute: true
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
+      ...getPetsSelect
     })
 
     return res
