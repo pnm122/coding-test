@@ -1,5 +1,6 @@
 import AttributesFilter from '@/components/AttributesFilter/AttributesFilter'
 import Filters from '@/components/Filters/Filters'
+import ProductsList from '@/components/ProductsList/ProductsList'
 import ProductsPage from '@/components/ProductsPage/ProductsPage'
 import { validateSearchParams } from '@/utils/searchParams'
 import React from 'react'
@@ -16,6 +17,7 @@ export default async function Pets({
   return (
     <ProductsPage>
       <Filters type='Pet' searchParams={validParams} attributesFilter={attributesFilter} />
+      <ProductsList type='Pet' searchParams={validParams} />
     </ProductsPage>
   )
 }
