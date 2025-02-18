@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "seed": "tsx prisma/seed.ts"
   },
   "dependencies": {
     "@prisma/client": "^6.3.1",
@@ -25,6 +26,7 @@
     "eslint-config-next": "15.1.7",
     "prisma": "^6.3.1",
     "sass": "^1.85.0",
+    "tsx": "^4.19.2",
     "typescript": "^5",
     "unplugin-icons": "^22.0.0"
   }
