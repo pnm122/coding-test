@@ -8,6 +8,7 @@
   padding-block: 4px;
   min-height: 24px;
   width: fit-content;
+  text-align: left;
 
 	&:focus-visible .checkbox__box {
 		border-color: var(--neutral-900);
