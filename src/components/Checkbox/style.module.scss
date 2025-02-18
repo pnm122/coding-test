@@ -5,6 +5,9 @@
 	justify-content: flex-start;
 	gap: 8px;
 	line-height: 1;
+  padding-block: 4px;
+  min-height: 24px;
+  width: fit-content;
 
 	&:focus-visible .checkbox__box {
 		border-color: var(--neutral-900);

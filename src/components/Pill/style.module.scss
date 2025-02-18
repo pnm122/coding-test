@@ -1,0 +1,10 @@
+.pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font: var(--font-heading-sm);
+  height: 24px;
+  white-space: nowrap;
+  padding-inline: 10px;
+  border-radius: 999px;
+}
