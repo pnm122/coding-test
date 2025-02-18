@@ -1,0 +1,11 @@
+.logo {
+  font: var(--font-body-base);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--primary-base);
+
+  b {
+    font: var(--font-heading-base);
+  }
+}

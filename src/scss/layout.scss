@@ -1,9 +1,33 @@
 @use 'breakpoints' as *;
 
-@mixin columns($num-columns, $gap: 0) {
+@mixin columns($num-columns, $gap: 16) {
   display: grid;
   grid-template-columns: repeat($num-columns, minmax(0, 1fr));
-  gap: $gap;
+  gap: #{$gap}px;
+}
+
+@mixin page-columns {
+  @include columns(1);
+
+  @media screen and (width > $screen-xs) {
+    @include columns(2);
+  }
+
+  @media screen and (width > $screen-sm) {
+    @include columns(3);
+  }
+
+  @media screen and (width > $screen-md) {
+    @include columns(4);
+  }
+
+  @media screen and (width > $screen-lg) {
+    @include columns(5);
+  }
+
+  @media screen and (width > $screen-xl) {
+    @include columns(6);
+  }
 }
 
 @mixin container {

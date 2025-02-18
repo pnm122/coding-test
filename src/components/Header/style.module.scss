@@ -1,0 +1,40 @@
+@use '@/scss/layout' as *;
+@use '@/scss/breakpoints' as *;
+
+.header {
+  @include container;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  @media screen and (width > $screen-md) {
+    @include page-columns;
+
+    &__nav {
+      grid-column: 2 / -1;
+    }
+  }
+}
+
+.links {
+  display: flex;
+  gap: 48px;
+  margin: 0;
+  padding: 0;
+
+  &__item {
+    display: block;
+  }
+}
+
+.link {
+  font: var(--font-heading-base);
+  display: grid;
+  place-items: center;
+  height: 44px;
+
+  &[aria-current="page"] {
+    text-decoration: underline;
+  }
+}
