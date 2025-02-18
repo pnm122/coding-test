@@ -1,5 +1,15 @@
+@use 'breakpoints' as *;
+
 @mixin columns($num-columns, $gap: 0) {
   display: grid;
   grid-template-columns: repeat($num-columns, minmax(0, 1fr));
   gap: $gap;
+}
+
+@mixin container {
+  padding-inline: 16px;
+
+  @media screen and (width > $screen-md) {
+    padding-inline: 24px;
+  }
 }
