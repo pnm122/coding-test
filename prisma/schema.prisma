@@ -12,3 +12,99 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Animal {
+  id      Int            @id @default(autoincrement())
+  name    String
+  weight  Float
+  type_id Int
+  type    Type           @relation(fields: [type_id], references: [id])
+  colors  Animal_Color[]
+  sale    Sale?
+  pet     Pet?
+  toy     Toy?
+}
+
+model Pet {
+  id         Int             @id @default(autoincrement())
+  animal_id  Int             @unique
+  animal     Animal          @relation(fields: [animal_id], references: [id])
+  attributes Pet_Attribute[]
+}
+
+model Toy {
+  id        Int     @id @default(autoincrement())
+  animal_id Int     @unique
+  animal    Animal  @relation(fields: [animal_id], references: [id])
+  size      ToySize
+}
+
+enum ToySize {
+  Small
+  Medium
+  Large
+}
+
+model Sale {
+  id        Int      @id @default(autoincrement())
+  date      DateTime
+  price     Float
+  animal_id Int      @unique
+  animal    Animal   @relation(fields: [animal_id], references: [id])
+}
+
+model Type {
+  id         Int              @id @default(autoincrement())
+  name       String
+  animals    Animal[]
+  attributes Type_Attribute[]
+}
+
+model Attribute {
+  id        Int              @id @default(autoincrement())
+  attribute String
+  types     Type_Attribute[]
+  pets      Pet_Attribute[]
+}
+
+model Type_Attribute {
+  id           Int       @id @default(autoincrement())
+  type_id      Int
+  type         Type      @relation(fields: [type_id], references: [id])
+  attribute_id Int
+  attribute    Attribute @relation(fields: [attribute_id], references: [id])
+}
+
+model Pet_Attribute {
+  id           Int       @id @default(autoincrement())
+  pet_id       Int
+  pet          Pet       @relation(fields: [pet_id], references: [id])
+  attribute_id Int
+  attribute    Attribute @relation(fields: [attribute_id], references: [id])
+}
+
+model Color {
+  id      Int            @id @default(autoincrement())
+  color   ColorEnum
+  animals Animal_Color[]
+}
+
+enum ColorEnum {
+  Red
+  Orange
+  Green
+  Blue
+  Purple
+  Brown
+  Black
+  Gray
+  White
+}
+
+model Animal_Color {
+  id        Int    @id @default(autoincrement())
+  animal_id Int
+  animal    Animal @relation(fields: [animal_id], references: [id])
+  color_id  Int
+  color     Color  @relation(fields: [color_id], references: [id])
+}
