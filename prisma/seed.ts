@@ -337,9 +337,6 @@ async function seedToys() {
 main()
   .then(async () => {
     console.log('Seeded database.')
-    const res = await prisma.animal.findMany({
-    })
-    console.log(JSON.stringify(res))
     await prisma.$disconnect()
   })
   .catch(async (e) => {
