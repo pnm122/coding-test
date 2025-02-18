@@ -12,11 +12,13 @@ import { ValidSearchParams } from '@/utils/searchParams'
 interface Props<T extends 'Pet' | 'Toy'> {
   type: T
   searchParams: ValidSearchParams<T>
+  attributesFilter: React.ReactNode
 }
 
 export default function Filters<T extends 'Pet' | 'Toy'>({
   type,
-  searchParams
+  searchParams,
+  attributesFilter
 }: Props<T>) {
   const [open, setOpen] = useState(false)
   const firstFilterRef = useRef<HTMLDivElement>(null)
@@ -25,7 +27,7 @@ export default function Filters<T extends 'Pet' | 'Toy'>({
   return (
     <div className={styles['filters']}>
       <FilterSearch />
-      <MainFilters searchParams={searchParams} type={type} className={styles['desktop-filters']} />
+      <MainFilters searchParams={searchParams} type={type} className={styles['desktop-filters']} attributesFilter={attributesFilter} />
       <div className={styles['mobile-filters']}>
         <button
           aria-controls='filters-dropdown'
@@ -48,7 +50,7 @@ export default function Filters<T extends 'Pet' | 'Toy'>({
           focusOnOpenRef={firstFilterRef}
           toggleButton={toggleButtonRef}
         >
-          <MainFilters searchParams={searchParams} firstFilterRef={firstFilterRef} type={type} />
+          <MainFilters searchParams={searchParams} firstFilterRef={firstFilterRef} type={type} attributesFilter={attributesFilter} />
         </Dropdown>
       </div>
     </div>

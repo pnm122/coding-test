@@ -1,3 +1,4 @@
+import AttributesFilter from '@/components/AttributesFilter/AttributesFilter'
 import Filters from '@/components/Filters/Filters'
 import ProductsPage from '@/components/ProductsPage/ProductsPage'
 import { validateSearchParams } from '@/utils/searchParams'
@@ -10,10 +11,11 @@ export default async function Pets({
 }) {
   const res = await searchParams
   const validParams = validateSearchParams(res, 'Pet')
+  const attributesFilter = <AttributesFilter searchParams={validParams} />
 
   return (
     <ProductsPage>
-      <Filters type='Pet' searchParams={validParams} />
+      <Filters type='Pet' searchParams={validParams} attributesFilter={attributesFilter} />
     </ProductsPage>
   )
 }

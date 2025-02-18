@@ -2,12 +2,12 @@
 
 import createClasses from '@/utils/createClasses'
 import styles from './style.module.scss'
-import React, { useCallback, useState } from 'react'
+import React, { useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { Accordion } from '@szhsin/react-accordion'
 import FilterAccordionItem from '../FilterAccordionItem/FilterAccordionItem'
 import Checkbox from '../Checkbox/Checkbox'
-import { newParamsURL, SEARCH_PARAM_COLOR, SEARCH_PARAM_TYPE, SEARCH_PARAM_WEIGHT_MAX, SEARCH_PARAM_WEIGHT_MIN, ValidSearchParams } from '@/utils/searchParams'
+import { onUpdateValueArray, onUpdateValueSingle, SEARCH_PARAM_COLOR, SEARCH_PARAM_TYPE, SEARCH_PARAM_WEIGHT_MAX, SEARCH_PARAM_WEIGHT_MIN, ValidSearchParams } from '@/utils/searchParams'
 import CheckboxGroup from '../CheckboxGroup/CheckboxGroup'
 import { ColorEnum, PetTypeEnum, ToyTypeEnum } from '@prisma/client'
 import Pill from '../Pill/Pill'
@@ -19,13 +19,15 @@ interface Props<T extends 'Pet' | 'Toy'> {
   className?: string
   firstFilterRef?: React.RefObject<HTMLDivElement | null>
   searchParams: ValidSearchParams<T>
+  attributesFilter: React.ReactNode
 }
 
 export default function MainFilters<T extends 'Pet' | 'Toy'>({
   type,
   className,
   firstFilterRef,
-  searchParams
+  searchParams,
+  attributesFilter
 }: Props<T>) {
   const allSearchParams = useSearchParams()
   const router = useRouter()
@@ -33,38 +35,6 @@ export default function MainFilters<T extends 'Pet' | 'Toy'>({
     searchParams[SEARCH_PARAM_WEIGHT_MIN],
     searchParams[SEARCH_PARAM_WEIGHT_MAX]
   ])
-
-  function onUpdateValueArray(
-    key: string,
-    value: string,
-    // Whether to set this value (true) or remove it (false)
-    isSet: boolean
-  ) {
-    const currentValue = allSearchParams.getAll(key)
-    const newValue =
-      isSet
-        ? currentValue.includes(value) ? currentValue : [...currentValue, value]
-        : currentValue.includes(value) ? currentValue.filter(v => v !== value) : currentValue
-
-    router.push(
-      newParamsURL(
-        allSearchParams,
-        { [key]: newValue }
-      )
-    )
-  }
-
-  const onUpdateValueSingle = useCallback(
-    (key: string, value: string) => {
-      router.push(
-        newParamsURL(
-          allSearchParams,
-          { [key]: value }
-        )
-      )
-    },
-    [router, allSearchParams]
-  )
 
   function onRangeSliderInput(values: number[]) {
     setWeightRange(values)
@@ -76,12 +46,16 @@ export default function MainFilters<T extends 'Pet' | 'Toy'>({
       if(min !== searchParams[SEARCH_PARAM_WEIGHT_MIN]) {
         onUpdateValueSingle(
           SEARCH_PARAM_WEIGHT_MIN,
-          min.toString()
+          min.toString(),
+          allSearchParams,
+          router
         )
       } else if(max !== searchParams[SEARCH_PARAM_WEIGHT_MAX]) {
         onUpdateValueSingle(
           SEARCH_PARAM_WEIGHT_MAX,
-          max.toString()
+          max.toString(),
+          allSearchParams,
+          router
         )
       }
     },
@@ -101,7 +75,7 @@ export default function MainFilters<T extends 'Pet' | 'Toy'>({
                 <Checkbox
                   key={petType}
                   checked={(searchParams[SEARCH_PARAM_TYPE] as string[]).includes(petType)}
-                  onChange={(value) => onUpdateValueArray(SEARCH_PARAM_TYPE, petType, value)}
+                  onChange={(value) => onUpdateValueArray(SEARCH_PARAM_TYPE, petType, value, allSearchParams, router)}
                 >
                   {petType}
                 </Checkbox>
@@ -111,7 +85,7 @@ export default function MainFilters<T extends 'Pet' | 'Toy'>({
                 <Checkbox
                   key={toyType}
                   checked={(searchParams[SEARCH_PARAM_TYPE] as string[]).includes(toyType)}
-                  onChange={(value) => onUpdateValueArray(SEARCH_PARAM_TYPE, toyType, value)}
+                  onChange={(value) => onUpdateValueArray(SEARCH_PARAM_TYPE, toyType, value, allSearchParams, router)}
                 >
                   {toyType}
                 </Checkbox>
@@ -125,7 +99,7 @@ export default function MainFilters<T extends 'Pet' | 'Toy'>({
               <Checkbox
                 key={color}
                 checked={(searchParams[SEARCH_PARAM_COLOR] as string[]).includes(color)}
-                onChange={(value) => onUpdateValueArray(SEARCH_PARAM_COLOR, color, value)}
+                onChange={(value) => onUpdateValueArray(SEARCH_PARAM_COLOR, color, value, allSearchParams, router)}
               >
                 <Pill variant={color}>{color}</Pill>
               </Checkbox>
@@ -143,6 +117,11 @@ export default function MainFilters<T extends 'Pet' | 'Toy'>({
             />
           </div>
         </FilterAccordionItem>
+        {type === 'Pet' && (
+          <FilterAccordionItem header='Attributes'>
+            {attributesFilter}
+          </FilterAccordionItem>
+        )}
       </Accordion>
     </div>
   )
